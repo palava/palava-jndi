@@ -38,6 +38,6 @@ public class LocalJndiServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(LocalJndiServer.class).asEagerSingleton();
-        binder.bind(Context.class).toProvider(LocalJndiContextProvider.class).in(Scopes.NO_SCOPE);
+        binder.bind(Context.class).toProvider(LocalJndiContextProvider.class).in(Singleton.class);
     }
 }
