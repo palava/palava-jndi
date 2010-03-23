@@ -32,7 +32,7 @@ import java.util.Properties;
 /**
  * @author Tobias Sarnowski
  */
-public class LocalJndiContextProvider implements Provider<Context> {
+class LocalJndiContextProvider implements Provider<Context> {
     private static final Logger LOG = LoggerFactory.getLogger(LocalJndiContextProvider.class);
 
     @Override
