@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
  * 
  * @author Tobias Sarnowski
  */
-public class LocalJndiServerModule implements Module {
+public final class LocalJndiServerModule implements Module {
 
     @Override
     public void configure(Binder binder) {
