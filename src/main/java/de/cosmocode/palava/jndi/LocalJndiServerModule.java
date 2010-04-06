@@ -37,6 +37,8 @@ public class LocalJndiServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(LocalJndiServer.class).asEagerSingleton();
+        
+        // TODO Singleton correct? Provider method might be easier.
         binder.bind(Context.class).toProvider(LocalJndiContextProvider.class).in(Singleton.class);
     }
     

@@ -33,7 +33,7 @@ import com.google.inject.Provider;
  * 
  * @author Tobias Sarnowski
  */
-class LocalJndiContextProvider implements Provider<Context> {
+final class LocalJndiContextProvider implements Provider<Context> {
 
     @Override
     public Context get() {
