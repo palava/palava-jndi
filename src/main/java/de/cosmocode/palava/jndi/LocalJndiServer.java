@@ -20,47 +20,56 @@
 
 package de.cosmocode.palava.jndi;
 
-import de.cosmocode.palava.core.lifecycle.Disposable;
-import de.cosmocode.palava.core.lifecycle.Initializable;
-import de.cosmocode.palava.core.lifecycle.LifecycleException;
+import javax.naming.NamingException;
+
 import org.jnp.interfaces.NamingContext;
 import org.jnp.server.Main;
 import org.jnp.server.NamingServer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.naming.NamingException;
+import de.cosmocode.palava.core.lifecycle.Disposable;
+import de.cosmocode.palava.core.lifecycle.Initializable;
+import de.cosmocode.palava.core.lifecycle.LifecycleException;
 
 /**
+ * Installs a local jndi server provided by org.jnp.
+ * 
  * @author Tobias Sarnowski
+ * @author Willi Schoenborn
  */
-class LocalJndiServer implements Initializable, Disposable {
-    private static final Logger LOG = LoggerFactory.getLogger(LocalJndiServer.class);
+final class LocalJndiServer implements Initializable, Disposable {
+    
+    private final Main main;
 
-    private Main jndiServer;
-
-    @Override
-    public void initialize() throws LifecycleException {
-        NamingServer namingServer = null;
+    public LocalJndiServer() {
+        final NamingServer namingServer;
+        
         try {
             namingServer = new NamingServer();
         } catch (NamingException e) {
             throw new LifecycleException(e);
         }
+        
         NamingContext.setLocal(namingServer);
 
-        jndiServer = new Main();
-        jndiServer.setInstallGlobalService(true);
-        jndiServer.setPort(-1);
+        main = new Main();
+        main.setInstallGlobalService(true);
+        main.setPort(-1);
+    }
+    
+    @Override
+    public void initialize() throws LifecycleException {
         try {
-            jndiServer.start();
+            main.start();
+        /* CHECKSTYLE:OFF */
         } catch (Exception e) {
+        /* CHECKSTYLE:ON */
             throw new LifecycleException(e);
-       }
+        }
     }
 
     @Override
     public void dispose() throws LifecycleException {
-        jndiServer.stop();
+        main.stop();
     }
+    
 }

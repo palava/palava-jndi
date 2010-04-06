@@ -20,25 +20,25 @@
 
 package de.cosmocode.palava.jndi;
 
-import com.google.inject.Provider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.util.Properties;
+
+import com.google.inject.Provider;
 
 /**
+ * {@link Provider} for {@link Context} using {@link InitialContext#InitialContext(java.util.Hashtable)}.
+ * 
  * @author Tobias Sarnowski
  */
 class LocalJndiContextProvider implements Provider<Context> {
-    private static final Logger LOG = LoggerFactory.getLogger(LocalJndiContextProvider.class);
 
     @Override
     public Context get() {
         try {
-            Properties props = new Properties();
+            final Properties props = new Properties();
             props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
             props.put("java.naming.factory.url.pkgs", "org.jboss.naming:org.jnp.interfaces");
             return new InitialContext(props);
@@ -46,4 +46,5 @@ class LocalJndiContextProvider implements Provider<Context> {
             throw new IllegalArgumentException(e);
         }
     }
+    
 }

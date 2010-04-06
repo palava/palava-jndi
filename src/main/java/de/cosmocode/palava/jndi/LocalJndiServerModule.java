@@ -20,24 +20,24 @@
 
 package de.cosmocode.palava.jndi;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
-import com.google.inject.Scopes;
-import com.google.inject.Singleton;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.naming.Context;
 
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.Singleton;
+
 /**
+ * Binds {@link LocalJndiServer} as eager {@link Singleton} and
+ * binds {@link Context} to {@link LocalJndiContextProvider}.
+ * 
  * @author Tobias Sarnowski
  */
 public class LocalJndiServerModule implements Module {
-    private static final Logger LOG = LoggerFactory.getLogger(LocalJndiServerModule.class);
 
     @Override
     public void configure(Binder binder) {
         binder.bind(LocalJndiServer.class).asEagerSingleton();
         binder.bind(Context.class).toProvider(LocalJndiContextProvider.class).in(Singleton.class);
     }
+    
 }
