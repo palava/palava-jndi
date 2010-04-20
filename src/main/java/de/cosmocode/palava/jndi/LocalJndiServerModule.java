@@ -20,10 +20,15 @@
 
 package de.cosmocode.palava.jndi;
 
+import java.util.Properties;
+
 import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 /**
@@ -37,9 +42,24 @@ public final class LocalJndiServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(LocalJndiServer.class).asEagerSingleton();
-        
-        // TODO Singleton correct? Provider method might be easier.
-        binder.bind(Context.class).toProvider(LocalJndiContextProvider.class).in(Singleton.class);
+    }
+    
+    /**
+     * Provides a {@link Context}.
+     * 
+     * @return the initial local jndi context
+     */
+    @Provides
+    @Singleton
+    Context provideContext() {
+        try {
+            final Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
+            props.put("java.naming.factory.url.pkgs", "org.jboss.naming:org.jnp.interfaces");
+            return new InitialContext(props);
+        } catch (NamingException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
     
 }
