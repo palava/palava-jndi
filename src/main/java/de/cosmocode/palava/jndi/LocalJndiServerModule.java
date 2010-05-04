@@ -33,7 +33,7 @@ import com.google.inject.Singleton;
 
 /**
  * Binds {@link LocalJndiServer} as eager {@link Singleton} and
- * binds {@link Context} to {@link LocalJndiContextProvider}.
+ * binds {@link Context} to {@link LocalJndiServerModule}.
  * 
  * @author Tobias Sarnowski
  */
@@ -42,6 +42,7 @@ public final class LocalJndiServerModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(LocalJndiServer.class).asEagerSingleton();
+        binder.bind(JNDIContextBinder.class).to(JbossJNDIContextBinder.class).in(Singleton.class);
     }
     
     /**
@@ -61,5 +62,5 @@ public final class LocalJndiServerModule implements Module {
             throw new IllegalArgumentException(e);
         }
     }
-    
+
 }
