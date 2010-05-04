@@ -48,7 +48,7 @@ public class JbossJNDIContextBinder implements JNDIContextBinder {
     }
 
     @Override
-    public void bind(String jndiName, Object who, Class<?> classType) throws Exception {
+    public void bind(String jndiName, Object who, Class<?> classType) throws NamingException {
         createSubcontext(jndiName);
 
         NonSerializableFactory.bind(jndiName, who);

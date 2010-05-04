@@ -20,7 +20,6 @@
 
 package de.cosmocode.palava.jndi;
 
-import javax.naming.Context;
 import javax.naming.NamingException;
 
 
@@ -44,8 +43,8 @@ public interface JNDIContextBinder {
      * @param jndiName
      * @param who
      * @param classType
-     * @throws Exception
+     * @throws NamingException
      */
-    void bind(String jndiName, Object who, Class<?> classType) throws Exception;
+    void bind(String jndiName, Object who, Class<?> classType) throws NamingException;
 
 }
