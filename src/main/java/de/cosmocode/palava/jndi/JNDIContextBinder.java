@@ -22,8 +22,9 @@ package de.cosmocode.palava.jndi;
 
 import javax.naming.NamingException;
 
-
 /**
+ * FIXME should be JndiContextBinder
+ * 
  * @author Tobias Sarnowski
  */
 public interface JNDIContextBinder {

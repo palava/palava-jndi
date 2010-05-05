@@ -20,15 +20,23 @@
 
 package de.cosmocode.palava.jndi;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import javax.naming.Context;
+import javax.naming.Name;
+import javax.naming.NameNotFoundException;
+import javax.naming.NamingException;
+import javax.naming.Reference;
+import javax.naming.StringRefAddr;
+
 import org.jboss.util.naming.NonSerializableFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.naming.*;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
+ * FIXME should be JBossJndiContextBinder
+ * 
  * @author Tobias Sarnowski
  */
 public class JbossJNDIContextBinder implements JNDIContextBinder {
@@ -68,9 +76,9 @@ public class JbossJNDIContextBinder implements JNDIContextBinder {
         while (name.size() > 1) {
             final String ctxName = name.get(0);
             try {
-                ctx = (Context)ctx.lookup(ctxName);
+                ctx = (Context) ctx.lookup(ctxName);
                 LOG.trace("Subcontext {} already exists", ctxName);
-            }catch (NameNotFoundException e) {
+            } catch (NameNotFoundException e) {
                 LOG.info("Creating Subcontext {}", ctxName);
                 ctx = ctx.createSubcontext(ctxName);
             }
