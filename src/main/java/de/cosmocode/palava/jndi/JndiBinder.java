@@ -28,7 +28,7 @@ class JndiBinder implements Provider<Context> {
 	private JndiContextProvider jndiContextProvider;
 
 	@Inject
-	public JndiBinder(JndiContextProvider jndiContextProvider) {
+	public JndiBinder(JndiContextProvider jndiContextProvider, JndiContextBinderUtility jndiContextBinderUtility /* just to require the availability */) {
 		this.jndiContextProvider = jndiContextProvider;
 	}
 
