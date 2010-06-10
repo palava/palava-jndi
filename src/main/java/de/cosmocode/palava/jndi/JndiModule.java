@@ -16,11 +16,11 @@
 
 package de.cosmocode.palava.jndi;
 
+import javax.naming.Context;
+
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
-
-import javax.naming.Context;
 
 /**
  * @author Tobias Sarnowski

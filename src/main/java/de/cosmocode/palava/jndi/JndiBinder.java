@@ -16,10 +16,10 @@
 
 package de.cosmocode.palava.jndi;
 
+import javax.naming.Context;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
-import javax.naming.Context;
 
 /**
  * @author Tobias Sarnowski

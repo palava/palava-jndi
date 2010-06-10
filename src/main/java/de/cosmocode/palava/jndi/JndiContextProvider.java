@@ -16,9 +16,9 @@
 
 package de.cosmocode.palava.jndi;
 
-import com.google.inject.Provider;
-
 import javax.naming.Context;
+
+import com.google.inject.Provider;
 
 /**
  * @author Tobias Sarnowski
