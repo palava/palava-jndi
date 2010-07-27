@@ -23,11 +23,15 @@ import com.google.inject.Module;
 import com.google.inject.Scopes;
 
 /**
+ * Binds {@link Context} to {@link JndiBinder}.
+ * 
  * @author Tobias Sarnowski
  */
 public class JndiModule implements Module {
-	@Override
-	public void configure(Binder binder) {
-		binder.bind(Context.class).toProvider(JndiBinder.class).in(Scopes.NO_SCOPE);
-	}
+    
+    @Override
+    public void configure(Binder binder) {
+        binder.bind(Context.class).toProvider(JndiBinder.class).in(Scopes.NO_SCOPE);
+    }
+    
 }

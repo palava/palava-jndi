@@ -18,22 +18,29 @@ package de.cosmocode.palava.jndi;
 
 import javax.naming.Context;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * A {@link Context} {@link Provider} which requires the presence of
+ * {@link JndiContextBinderUtility}.
+ * 
  * @author Tobias Sarnowski
  */
 class JndiBinder implements Provider<Context> {
-	private JndiContextProvider jndiContextProvider;
+    
+    private final JndiContextProvider provider;
 
-	@Inject
-	public JndiBinder(JndiContextProvider jndiContextProvider, JndiContextBinderUtility jndiContextBinderUtility /* just to require the availability */) {
-		this.jndiContextProvider = jndiContextProvider;
-	}
+    @Inject
+    public JndiBinder(JndiContextProvider provider, JndiContextBinderUtility utility) {
+        this.provider = Preconditions.checkNotNull(provider, "Provider");
+        // require the availability
+        Preconditions.checkNotNull(utility, "Utility");
+    }
 
-	@Override
-	public Context get() {
-		return jndiContextProvider.get();
-	}
+    @Override
+    public Context get() {
+        return provider.get();
+    }
 }

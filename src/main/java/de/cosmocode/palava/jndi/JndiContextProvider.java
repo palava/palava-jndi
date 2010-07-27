@@ -21,7 +21,10 @@ import javax.naming.Context;
 import com.google.inject.Provider;
 
 /**
+ * Wrapper interface for {@link Provider} of {@link Context}.
+ * 
  * @author Tobias Sarnowski
  */
 public interface JndiContextProvider extends Provider<Context> {
+    
 }

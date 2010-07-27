@@ -19,6 +19,8 @@ package de.cosmocode.palava.jndi;
 import javax.naming.NamingException;
 
 /**
+ * A utility which simplifies binding.
+ * 
  * @author Tobias Sarnowski
  */
 public interface JndiContextBinderUtility {
@@ -26,19 +28,19 @@ public interface JndiContextBinderUtility {
     /**
      * Binds an object under its jndiName to a context, recursivly creating subcontexts.
      *
-     * @param jndiName
-     * @param who
-     * @throws NamingException
+     * @param jndiName the jndi name
+     * @param who the object
+     * @throws NamingException if binding failed
      */
     void bind(String jndiName, Object who) throws NamingException;
 
     /**
-     * Binds a non-serializable object under its jndiName to a context, recursivly creating subcontexts
+     * Binds a non-serializable object under its jndiName to a context, recursivly creating subcontexts.
      * 
-     * @param jndiName
-     * @param who
-     * @param classType
-     * @throws NamingException
+     * @param jndiName the jndi name
+     * @param who the object
+     * @param classType the class type
+     * @throws NamingException if binding failed
      */
     void bind(String jndiName, Object who, Class<?> classType) throws NamingException;
 
